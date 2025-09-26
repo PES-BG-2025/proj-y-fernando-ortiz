@@ -1,3 +1,33 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/7IRjtlNy)
+
+# Resumen del Proyecto:
+
+Este proyecto es un simulador del Dilema del Prisionero Iterado hecho en Python. La idea es enfrentar distintas estrategias de juego entre sí, ver cómo se comportan a lo largo de varias rondas y luego comparar cuál funciona mejor según los pagos definidos.
+
+# Lo que hace
+
+Hace que cada estrategia juegue contra todas las demás en partidas de n rondas.
+
+Usa una matriz de pagos (cooperar o traicionar) para calcular los puntos en cada enfrentamiento.
+
+Guarda los resultados en una matriz M, donde se ven los promedios obtenidos contra cada rival.
+
+Al final, saca un puntaje promedio por estrategia y arma un ranking.
+
+# Estructura
+
+Hay una clase base llamada Estrategia y a partir de ella se programan las distintas formas de jugar (ejemplo: Siempre cooperar, Siempre traicionar, Ojo por ojo, Ojo por dos ojos, incluso un jugador que traiciona cada cierto número de turnos).
+
+Se puede ajustar el número de rondas, los valores de los pagos, e incluso meterle un poco de “ruido” para que de vez en cuando una acción se cambie al azar.
+
+# Aporte
+
+El programa sirve para probar y comparar estrategias, ver cuáles sobreviven mejor en distintos escenarios, y entender cómo cambia el resultado cuando se modifican las reglas del juego. También deja la base para proponer en el futuro simulaciones más avanzadas, como poblaciones que evolucionan o estrategias que se van extinguiendo con el tiempo.
+
+
+
+
+
 # Presentación final del curso de Programación I
 
 Este repositorio tiene como propósito servir de contenedor para los archivos de la presentación final del curso. Se deben guardar todos los archivos utilizados para la presentación (vea las condiciones de entrega más adelante). 
