@@ -77,10 +77,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="quarto-light">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+  
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -102,14 +104,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="975e3058" class="cell" data-execution_count="1">
+<div id="ab9b6876" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------ Importando las librerias------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
-<div id="1d6f5938" class="cell" data-execution_count="2">
+<p>Acá se presentan los parametros que serán constantes:</p>
+<div id="c85f8307" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------ Estableciendo parámetros------------</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Número de rondas </span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>N_RONDAS <span class="op">=</span> <span class="dv">100</span></span>
@@ -121,8 +129,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>TONTO <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Extras</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>ruido <span class="op">=</span> <span class="fl">0.1</span> <span class="co"># probabilidad de voltear acción elegida. Ingresar valores entre [0, 1]</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>semilla <span class="op">=</span> <span class="dv">1</span> <span class="co"># para funciones con aleatoriedad</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>ruido <span class="op">=</span> <span class="fl">0.05</span> <span class="co"># probabilidad de voltear acción elegida. Ingresar valores entre [0, 1]</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>semilla <span class="op">=</span> <span class="dv">40</span> <span class="co"># para funciones con aleatoriedad</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Acciones</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> <span class="st">"C"</span> <span class="co"># cooperar</span></span>
@@ -134,13 +142,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        (C, T): (TONTO, APROVECHADO),</span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        (T, C): (APROVECHADO, TONTO),</span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        (T, T): (TRAIDORES, TRAIDORES)}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
-<div id="1c6bf6fb" class="cell" data-execution_count="3">
+<p>Podemos ver la creación de las clases, tenemos padres e hijos.</p>
+<div id="1bf16a53" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">### ------------ Estableciendo las clases, padres y hijos ------------</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Clase padres</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Estrategia:</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    nombre <span class="op">=</span> <span class="st">"base"</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> reiniciar(<span class="va">self</span>): <span class="co"># Reinicia el "tablero" del juego</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> reiniciar(<span class="va">self</span>): <span class="co"># Reinicia la estrategia jugada</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> decidir(<span class="va">self</span>, mi_historial, historial_rival):</span>
@@ -257,8 +269,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> turno <span class="op">%</span> <span class="dv">7</span> <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> T</span>
 <span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> historial_rival[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
-<div id="fc164dae" class="cell" data-execution_count="4">
+<p>Aplicación de ruido</p>
+<div id="af5cf3b9" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Jugadas con opción de ruido de comunicación</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> aplicar_ruido(accion, prob:<span class="bu">float</span>, rng):</span>
@@ -272,121 +288,160 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Voltea decisión con probabilidad p</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (C <span class="cf">if</span> accion <span class="op">==</span> T <span class="cf">else</span> T) <span class="cf">if</span> rng.random() <span class="op">&lt;</span> prob <span class="cf">else</span> accion</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
-<div id="b9815d4a" class="cell" data-execution_count="5">
+<p>Juego entre dos jugadores o estrategias distintas</p>
+<div id="ecf8665c" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> jugar_partida(j1: Estrategia, j2: Estrategia, n<span class="op">=</span>N_RONDAS, prob_ruido<span class="op">=</span>ruido):</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    j1.reiniciar()</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    j2.reiniciar()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Reiniciando por si las estrategias ya tenían alguna decición tomada.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    j1.reiniciar()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    j2.reiniciar()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Devuelve un número aleatorio pero que es fijo para cada corrida que se haga.</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   Se podría decir que es una aleatoridad controlada</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    rng <span class="op">=</span> random.Random(semilla)</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Listas vacias y contadores en 0</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    hist1 <span class="op">=</span> []</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    hist2 <span class="op">=</span> []</span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    pagos_lista <span class="op">=</span> []</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    suma1 <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    suma2 <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    suma1 <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    suma2 <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ciclo for para las n rondas</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Toma de deciones, acciones de cada jugador</span></span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        a1 <span class="op">=</span> j1.decidir(hist1, hist2) </span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        a2 <span class="op">=</span> j2.decidir(hist2, hist1)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Aplicación de ruido</span></span>
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        a1 <span class="op">=</span> aplicar_ruido(a1, prob_ruido, rng) </span>
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        a2 <span class="op">=</span> aplicar_ruido(a2, prob_ruido, rng)</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        (p1, p2) <span class="op">=</span> PAGOS[(a1, a2)]</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        pagos_lista.append((p1, p2))</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        hist1.append(a1)</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        hist2.append(a2)</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        suma1 <span class="op">=</span> suma1 <span class="op">+</span> p1</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        suma2 <span class="op">=</span> suma2 <span class="op">+</span> p2</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Promedio de puntos para cada jugador al final del partido</span></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    prom1 <span class="op">=</span> suma1 <span class="op">/</span> n </span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    prom2 <span class="op">=</span> suma2 <span class="op">/</span> n</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pagos"</span>: pagos_lista,</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>        <span class="st">"promedios"</span>: (prom1, prom2),</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>        <span class="st">"hist1"</span>: hist1,</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>        <span class="st">"hist2"</span>: hist2,</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>    }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculando lo pagos con base a las acciones tomadas.</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        (p1, p2) <span class="op">=</span> PAGOS[(a1, a2)]</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Añadiendo al historial</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        pagos_lista.append((p1, p2))</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        hist1.append(a1)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        hist2.append(a2)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Sumando pagos</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        suma1 <span class="op">=</span> suma1 <span class="op">+</span> p1</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        suma2 <span class="op">=</span> suma2 <span class="op">+</span> p2</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Promedio de pupagos para cada jugador al final del partido </span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    prom1 <span class="op">=</span> suma1 <span class="op">/</span> n </span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    prom2 <span class="op">=</span> suma2 <span class="op">/</span> n</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># retorno</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pagos"</span>: pagos_lista,</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">"promedios"</span>: (prom1, prom2),</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">"hist1"</span>: hist1,</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"hist2"</span>: hist2,</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
-<div id="50ace332" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>j1 <span class="op">=</span> OjoPorOjo()</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>j2 <span class="op">=</span> OjoPorDosOjos()</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>j3 <span class="op">=</span> Aleatorio()</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<ul>
+<li>Acá presentamos algunos pequeños resultados</li>
+</ul>
+<div id="df84395c" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creando 3 estrategias</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>j1 <span class="op">=</span> OjoPorOjo()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>j2 <span class="op">=</span> OjoPorDosOjos()</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>j3 <span class="op">=</span> Aleatorio()</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>jugadores <span class="op">=</span> {<span class="dv">1</span>: j1, <span class="dv">2</span>: j2, <span class="dv">3</span>: j3}</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>nombres_jugadores <span class="op">=</span> {<span class="dv">1</span>: j1.nombre, <span class="dv">2</span>: j2.nombre, <span class="dv">3</span>: j3.nombre}</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>           </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos un diccionario de estrategia o jugadores y otro diccionario para los nombres.</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   Esto nos servira adelante.</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>jugadores <span class="op">=</span> {<span class="dv">1</span>: j1, <span class="dv">2</span>: j2, <span class="dv">3</span>: j3}</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>nombres_jugadores <span class="op">=</span> {<span class="dv">1</span>: j1.nombre, <span class="dv">2</span>: j2.nombre, <span class="dv">3</span>: j3.nombre}</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Ciclo for para determinar los juegos posibles de cada dos jugadores          </span></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">3</span><span class="op">+</span><span class="dv">1</span>):</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">3</span><span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">!=</span> j:</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>            nombre <span class="op">=</span> <span class="bu">str</span>(<span class="ss">f"res_</span><span class="sc">{</span>i<span class="sc">}{</span>j<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>            nombre <span class="op">=</span>jugar_partida(jugadores[i], jugadores[j], n<span class="op">=</span>N_RONDAS, prob_ruido<span class="op">=</span>ruido)</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"J</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>nombres_jugadores[i]<span class="sc">}</span><span class="ss">) vs J</span><span class="sc">{</span>j<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>nombres_jugadores[j]<span class="sc">}</span><span class="ss">):"</span>)</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Promedio: </span><span class="sc">{</span>nombre[<span class="st">"promedios"</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Primeros pagos:"</span>, nombre[<span class="st">"pagos"</span>][:<span class="dv">10</span>])</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        juego <span class="op">=</span>jugar_partida(jugadores[i], jugadores[j], n<span class="op">=</span>N_RONDAS, prob_ruido<span class="op">=</span>ruido)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"J</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>nombres_jugadores[i]<span class="sc">}</span><span class="ss">) vs J</span><span class="sc">{</span>j<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>nombres_jugadores[j]<span class="sc">}</span><span class="ss">):"</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Primeros 10 pagos:"</span>, juego[<span class="st">"pagos"</span>][:<span class="dv">10</span>])</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Promedio de pagos: </span><span class="sc">{</span>juego[<span class="st">"promedios"</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code>J1 (Ojo por ojo) vs J2 (Ojo por dos ojos):
-Promedio: (2.94, 2.69)
-Primeros pagos: [(3, 3), (3, 3), (3, 3), (3, 3), (1, 1), (5, 0), (3, 3), (3, 3), (3, 3), (0, 5)]
+<pre><code>J1 (Ojo por ojo) vs J1 (Ojo por ojo):
+Primeros 10 pagos: [(3, 3), (5, 0), (0, 5), (5, 0), (0, 5), (3, 3), (3, 3), (3, 3), (3, 3), (3, 3)]
+Promedio de pagos: (2.67, 2.67)
+
+J1 (Ojo por ojo) vs J2 (Ojo por dos ojos):
+Primeros 10 pagos: [(3, 3), (5, 0), (3, 3), (3, 3), (3, 3), (5, 0), (3, 3), (3, 3), (3, 3), (3, 3)]
+Promedio de pagos: (3.07, 2.72)
 
 J1 (Ojo por ojo) vs J3 (Aleatorio):
-Promedio: (2.18, 2.18)
-Primeros pagos: [(3, 3), (3, 3), (0, 5), (5, 0), (1, 1), (5, 0), (0, 5), (1, 1), (1, 1), (5, 0)]
+Primeros 10 pagos: [(3, 3), (5, 0), (0, 5), (5, 0), (0, 5), (0, 5), (5, 0), (0, 5), (5, 0), (3, 3)]
+Promedio de pagos: (2.46, 2.21)
 
 J2 (Ojo por dos ojos) vs J1 (Ojo por ojo):
-Promedio: (2.43, 2.83)
-Primeros pagos: [(3, 3), (3, 3), (3, 3), (3, 3), (1, 1), (0, 5), (1, 1), (1, 1), (1, 1), (5, 0)]
+Primeros 10 pagos: [(3, 3), (5, 0), (0, 5), (3, 3), (3, 3), (5, 0), (0, 5), (3, 3), (3, 3), (3, 3)]
+Promedio de pagos: (2.72, 3.02)
+
+J2 (Ojo por dos ojos) vs J2 (Ojo por dos ojos):
+Primeros 10 pagos: [(3, 3), (5, 0), (3, 3), (3, 3), (3, 3), (5, 0), (3, 3), (3, 3), (3, 3), (3, 3)]
+Promedio de pagos: (3.0, 2.85)
 
 J2 (Ojo por dos ojos) vs J3 (Aleatorio):
-Promedio: (1.84, 2.94)
-Primeros pagos: [(0, 5), (3, 3), (0, 5), (3, 3), (1, 1), (0, 5), (1, 1), (5, 0), (0, 5), (0, 5)]
+Primeros 10 pagos: [(3, 3), (1, 1), (3, 3), (3, 3), (0, 5), (5, 0), (0, 5), (0, 5), (5, 0), (3, 3)]
+Promedio de pagos: (2.03, 3.08)
 
 J3 (Aleatorio) vs J1 (Ojo por ojo):
-Promedio: (2.21, 2.01)
-Primeros pagos: [(3, 3), (5, 0), (0, 5), (5, 0), (3, 3), (3, 3), (1, 1), (0, 5), (5, 0), (3, 3)]
+Primeros 10 pagos: [(5, 0), (0, 5), (5, 0), (0, 5), (3, 3), (5, 0), (0, 5), (5, 0), (1, 1), (0, 5)]
+Promedio de pagos: (2.21, 2.31)
 
 J3 (Aleatorio) vs J2 (Ojo por dos ojos):
-Promedio: (3.19, 1.74)
-Primeros pagos: [(5, 0), (5, 0), (1, 1), (0, 5), (1, 1), (5, 0), (3, 3), (3, 3), (5, 0), (1, 1)]
+Primeros 10 pagos: [(5, 0), (3, 3), (5, 0), (3, 3), (3, 3), (5, 0), (3, 3), (3, 3), (3, 3), (3, 3)]
+Promedio de pagos: (2.98, 1.88)
+
+J3 (Aleatorio) vs J3 (Aleatorio):
+Primeros 10 pagos: [(3, 3), (5, 0), (1, 1), (0, 5), (1, 1), (5, 0), (0, 5), (1, 1), (1, 1), (0, 5)]
+Promedio de pagos: (1.94, 2.34)
 </code></pre>
 </div>
 </div>
-<div id="ef56ae47" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> torneo_resultados(estrategias):</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    nombres <span class="op">=</span> [e.nombre <span class="cf">for</span> e <span class="kw">in</span> estrategias]</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> pd.DataFrame(np.nan, index<span class="op">=</span>nombres, columns<span class="op">=</span>nombres)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    conteo_partidas <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, ei <span class="kw">in</span> <span class="bu">enumerate</span>(estrategias):</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j, ej <span class="kw">in</span> <span class="bu">enumerate</span>(estrategias):</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            <span class="co"># if i == j:</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                <span class="co"># continue</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            prom_i, prom_j <span class="op">=</span> jugar_partida(ei, ej, n<span class="op">=</span>N_RONDAS, prob_ruido<span class="op">=</span>ruido)[<span class="st">"promedios"</span>]</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>            M.iat[i, j] <span class="op">=</span> prom_i  <span class="co"># promedio del jugador i contra j</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>            conteo_partidas <span class="op">=</span> conteo_partidas <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> M</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#### las estrategias</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>estrategias <span class="op">=</span> [OjoPorOjo(), SiempreTraicionar(), Aleatorio(), Vengativo(), Joss(), Umbral60(), Pavlov(), Alternadora()]</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>torneo_resultados(estrategias)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<p><strong>TORNEO DE JUGADORES</strong> ¿Quién ganará?</p>
+<p>Acá se detalla cómo se genera una matriz de resultado de los pagos para todos los jugadores (o estrategias)</p>
+<div id="667a882d" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definición de una función general para todas las estrategias.</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> torneo_resultados(estrategias):</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Creación de la lista con los nombres de las estrategias</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    nombres <span class="op">=</span> [e.nombre <span class="cf">for</span> e <span class="kw">in</span> estrategias]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Creación de DataFrame con Nan</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> pd.DataFrame(np.nan, index<span class="op">=</span>nombres, columns<span class="op">=</span>nombres)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ciclo for para los juegos posibles</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, ei <span class="kw">in</span> <span class="bu">enumerate</span>(estrategias):</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j, ej <span class="kw">in</span> <span class="bu">enumerate</span>(estrategias):</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            <span class="co"># lo anterior lo comentamos para que también apareciera la estragias vs si misma</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>            <span class="co"># if i == j:</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                <span class="co"># continue</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Los promedios de los pagos para los juegos</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>            prom_i, prom_j <span class="op">=</span> jugar_partida(ei, ej, n<span class="op">=</span>N_RONDAS, prob_ruido<span class="op">=</span>ruido)[<span class="st">"promedios"</span>]</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Asignamos promedio del jugador i contra j al DataFrame</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>            M.iat[i, j] <span class="op">=</span> prom_i  </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Impresión de la matriz</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"=================================="</span>)     </span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"===  Matriz de pagos promedios ==="</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"=================================="</span>) </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Filas vs columnas"</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> M</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Acá vamos a correr el juego para las distintas estrategias e imprimir.</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>estrategias <span class="op">=</span> [OjoPorOjo(), SiempreTraicionar(), Aleatorio(), Vengativo(), Joss(), Umbral60(), Pavlov(), Alternadora()]</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>Resultados <span class="op">=</span>torneo_resultados(estrategias)</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>Resultados</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>==================================
+===  Matriz de pagos promedios ===
+==================================
+Filas vs columnas</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 
 
@@ -407,91 +462,91 @@ Primeros pagos: [(5, 0), (5, 0), (1, 1), (0, 5), (1, 1), (5, 0), (3, 3), (3, 3),
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">Ojo por ojo</th>
-<td>2.03</td>
-<td>1.27</td>
-<td>2.40</td>
-<td>1.35</td>
-<td>1.98</td>
-<td>2.95</td>
+<td>2.67</td>
+<td>1.10</td>
 <td>2.32</td>
+<td>1.17</td>
+<td>1.87</td>
+<td>1.26</td>
+<td>2.35</td>
 <td>2.43</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">Siempre traicionar</th>
-<td>1.82</td>
-<td>1.34</td>
-<td>3.02</td>
-<td>1.38</td>
-<td>1.82</td>
-<td>1.38</td>
-<td>2.80</td>
-<td>2.97</td>
+<td>1.55</td>
+<td>1.15</td>
+<td>2.81</td>
+<td>1.19</td>
+<td>1.51</td>
+<td>1.19</td>
+<td>2.90</td>
+<td>2.87</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">Aleatorio</th>
-<td>2.18</td>
-<td>0.86</td>
-<td>2.17</td>
-<td>0.95</td>
-<td>1.78</td>
-<td>1.01</td>
-<td>2.27</td>
-<td>2.48</td>
+<td>2.35</td>
+<td>0.71</td>
+<td>2.38</td>
+<td>0.74</td>
+<td>2.09</td>
+<td>0.80</td>
+<td>2.36</td>
+<td>2.16</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">Vengativo</th>
-<td>1.80</td>
-<td>1.33</td>
-<td>3.06</td>
-<td>1.40</td>
-<td>1.77</td>
-<td>1.40</td>
-<td>2.85</td>
-<td>2.94</td>
+<td>1.57</td>
+<td>1.14</td>
+<td>2.90</td>
+<td>1.21</td>
+<td>1.53</td>
+<td>1.25</td>
+<td>2.82</td>
+<td>2.86</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">Joss</th>
-<td>2.00</td>
-<td>1.28</td>
-<td>2.41</td>
-<td>1.35</td>
-<td>1.94</td>
-<td>1.37</td>
-<td>2.25</td>
-<td>2.45</td>
+<td>2.15</td>
+<td>1.10</td>
+<td>2.44</td>
+<td>1.18</td>
+<td>1.64</td>
+<td>1.27</td>
+<td>2.23</td>
+<td>2.43</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">Umbral 60%</th>
-<td>1.73</td>
-<td>1.33</td>
-<td>2.64</td>
-<td>1.35</td>
-<td>1.69</td>
-<td>2.83</td>
-<td>2.72</td>
-<td>2.93</td>
+<td>2.73</td>
+<td>1.14</td>
+<td>2.62</td>
+<td>1.20</td>
+<td>1.56</td>
+<td>2.97</td>
+<td>2.87</td>
+<td>2.85</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">Pavlov (Gana-Permanece)</th>
-<td>2.37</td>
-<td>0.92</td>
-<td>2.36</td>
-<td>1.00</td>
-<td>2.31</td>
-<td>1.04</td>
-<td>2.54</td>
-<td>2.40</td>
+<td>2.15</td>
+<td>0.71</td>
+<td>2.60</td>
+<td>0.79</td>
+<td>1.97</td>
+<td>0.79</td>
+<td>2.67</td>
+<td>2.19</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">Alternadora</th>
-<td>2.11</td>
-<td>1.02</td>
-<td>1.93</td>
-<td>1.09</td>
-<td>2.07</td>
-<td>1.13</td>
-<td>2.47</td>
-<td>2.33</td>
+<td>2.43</td>
+<td>0.70</td>
+<td>2.01</td>
+<td>0.83</td>
+<td>2.24</td>
+<td>1.46</td>
+<td>2.34</td>
+<td>2.06</td>
 </tr>
 </tbody>
 </table>
@@ -499,48 +554,60 @@ Primeros pagos: [(5, 0), (5, 0), (1, 1), (0, 5), (1, 1), (5, 0), (3, 3), (3, 3),
 </div>
 </div>
 </div>
-<div id="8d092edd" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#### las estrategias</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>estrategias <span class="op">=</span> [OjoPorOjo(), SiempreTraicionar(), Aleatorio(), Vengativo(), Joss(), Umbral60(), Pavlov(), Alternadora()]</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span>torneo_resultados(estrategias)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># === Cálculo de promedios y ranking ===</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>promedio_por_estrategia <span class="op">=</span> M.mean(axis<span class="op">=</span><span class="dv">1</span>, skipna<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>ranking <span class="op">=</span> promedio_por_estrategia.sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># === Mostrar tabla en consola ===</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>tabla <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Estrategia"</span>: ranking.index,</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Promedio final"</span>: ranking.values</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Promedios finales"</span>)</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabla.to_string(index<span class="op">=</span><span class="va">False</span>, float_format<span class="op">=</span><span class="kw">lambda</span> x: <span class="ss">f"</span><span class="sc">{</span>x<span class="sc">:.3f}</span><span class="ss">"</span>))</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfica de barras </span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.bar(ranking.index, ranking.values, color<span class="op">=</span><span class="st">'skyblue'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Puntaje promedio por ronda"</span>)</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Desempeño de la estrategia"</span>)</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Etiquetas encima de las barras</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, valor <span class="kw">in</span> <span class="bu">enumerate</span>(ranking.values):</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    plt.text(i, valor <span class="op">+</span> <span class="fl">0.01</span>, <span class="ss">f"</span><span class="sc">{</span>valor<span class="sc">:.2f}</span><span class="ss">"</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'bottom'</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Gráfica resumen</p>
+<div id="af7a09a0" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo de promedios para una estrategias vs todas las otras y ranking ===</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>promedio_por_estrategia <span class="op">=</span> Resultados.mean(axis<span class="op">=</span><span class="dv">1</span>, skipna<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>ranking <span class="op">=</span> promedio_por_estrategia.sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostramos el ranking como un DataDFrame</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>tabla <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Estrategia"</span>: ranking.index,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Promedio final"</span>: ranking.values</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"==========================================="</span>)     </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Promedios finales"</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"==========================================="</span>) </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabla)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Gráfica</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=================================================================================================="</span>)     </span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Grafica de promedios"</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=================================================================================================="</span>)  </span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>plt.bar(ranking.index, ranking.values, color<span class="op">=</span><span class="st">'skyblue'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Puntaje promedio por ronda"</span>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Desempeño de la estrategia"</span>)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Etiquetas encima de las barras</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, valor <span class="kw">in</span> <span class="bu">enumerate</span>(ranking.values):</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    plt.text(i, valor <span class="op">+</span> <span class="fl">0.01</span>, <span class="ss">f"</span><span class="sc">{</span>valor<span class="sc">:.2f}</span><span class="ss">"</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'bottom'</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code>
+<pre><code>===========================================
 Promedios finales
-             Estrategia  Promedio final
-             Umbral 60%           2.163
-                   Joss           2.123
-            Ojo por ojo           2.121
-              Vengativo           2.055
-     Siempre traicionar           2.054
-              Aleatorio           1.916
-Pavlov (Gana-Permanece)           1.849
-            Alternadora           1.805</code></pre>
+===========================================
+                Estrategia  Promedio final
+0               Umbral 60%         2.24250
+1                Vengativo         1.91000
+2              Ojo por ojo         1.89625
+3       Siempre traicionar         1.89625
+4                     Joss         1.80500
+5              Alternadora         1.75875
+6  Pavlov (Gana-Permanece)         1.73375
+7                Aleatorio         1.69875
+
+==================================================================================================
+Grafica de promedios
+==================================================================================================</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
